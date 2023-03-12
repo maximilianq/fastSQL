@@ -1,4 +1,5 @@
-from psycopg import connect, connection
+from psycopg import connect
+from psycopg.connection import Connection
 
 from typing import List, Dict, Optional, Union
 
@@ -11,7 +12,7 @@ class FastSQL:
         self.database: str = database
         self.user: str = user
         self.password: str = password
-        self.connection: Optional[connection] = None
+        self.connection: Optional[Connection] = None
 
     def execute(self, query: str, data: Dict[str, object], column_collapse: bool = False, row_collapse: bool = False) -> Union[Dict[str, object], List[Dict[str, object]], List[object], object, None]:
 
@@ -38,3 +39,15 @@ class FastSQL:
 
     def stop(self) -> None:
         self.connection.close()
+
+
+class SQLRouter:
+
+    def __init__(self) -> None:
+        self.client: FastSQL = None
+    
+    def include(self, client: FastSQL) -> None:
+        self.client = client
+
+    def execute(self, query: str, data: Dict[str, object], column_collapse: bool = False, row_collapse: bool = False) -> Union[Dict[str, object], List[Dict[str, object]], List[object], object, None]:
+        self.client.execute(query, data, column_collapse, row_collapse)

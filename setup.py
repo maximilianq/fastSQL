@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="fastsql",
-    version='0.0.0.1',
+    version='0.0.0.2',
     description="Library for SQL integration using annotations.",
     author="Maximilian Quaeck",
     author_email="maximilian.quaeck@gmx.de",
@@ -10,6 +10,7 @@ setup(
     packages=['fastsql'],
     package_dir={'fastsql': 'src'},
     install_requires=[
-        "psycopg-binary"
+        "psycopg-binary",
+        "psycopg"
     ]
 )

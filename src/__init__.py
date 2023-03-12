@@ -1,1 +1,1 @@
-from .fastsql import FastSQL
+from .fastsql import FastSQL, SQLRouter
