@@ -39,6 +39,10 @@ class FastSQL:
 
     def stop(self) -> None:
         self.connection.close()
+        self.connection.close()
+
+    def include_router(self, router: 'SQLRouter') -> None:
+        router.include(self)
 
 
 class SQLRouter:
